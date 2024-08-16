@@ -133,36 +133,51 @@ Create a simple API endpoint that returns a list of items.
 2. **Replace the Code with the Following**:
 
    ```javascript
-   import React, { useState, useEffect } from "react";
-   import axios from "axios";
+   import React, { useState, useEffect } from "react"; // Importing React and two hooks, useState and useEffect
+   import axios from "axios"; // Importing Axios, a library to make HTTP requests
 
    function App() {
+     // This is our main App component
+
+     // useState is a React Hook that lets you add state to a functional component.
+     // Here, we're creating a state variable called 'items' that starts as an empty array.
+     // We also have 'setItems', a function to update the 'items' state.
      const [items, setItems] = useState([]);
 
+     // useEffect is another React Hook that lets you run side effects in your component.
+     // Side effects are things like fetching data, updating the DOM, or setting up subscriptions.
+     // This effect runs once when the component mounts because of the empty dependency array [].
      useEffect(() => {
+       // axios.get makes a GET request to the given URL (our API endpoint).
+       // When the data is successfully fetched, we use setItems to update the 'items' state with the fetched data.
        axios
-         .get("https://localhost:5001/api/items")
+         .get("https://localhost:5001/api/items") // URL of our ASP.NET Core API
          .then((response) => {
-           setItems(response.data);
+           setItems(response.data); // Store the fetched data (response.data) in 'items'
          })
          .catch((error) => {
-           console.error("There was an error fetching the items!", error);
+           console.error("There was an error fetching the items!", error); // Log any error that occurs during the request
          });
-     }, []);
+     }, []); // The empty array here means this effect runs only once, after the first render.
 
+     // The return statement defines what gets rendered on the screen.
+     // We're creating a simple unordered list (<ul>) of items.
      return (
        <div className="App">
          <h1>Items from API</h1>
          <ul>
            {items.map((item, index) => (
-             <li key={index}>{item}</li>
+             <li key={index}>
+               {item}{" "}
+               {/* Each item is rendered inside an <li> element. The 'key' prop helps React efficiently manage and update the list items. */}
+             </li>
            ))}
          </ul>
        </div>
      );
    }
 
-   export default App;
+   export default App; // Exporting the App component so it can be used in other parts of the project
    ```
 
    - **`useState([])`**:
@@ -208,5 +223,3 @@ Create a simple API endpoint that returns a list of items.
 
 3. **Visit `http://localhost:3000`**:
    You should see a list of items fetched from the ASP.NET Core API.
-
----
