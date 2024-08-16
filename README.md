@@ -1,7 +1,3 @@
-Here's the full guide, formatted for a README file:
-
----
-
 ## Building a React Front-End with an ASP.NET Core API Back-End
 
 This guide will walk you through creating a simple web application using React for the front end and ASP.NET Core for the API back end. We’ll cover everything from setting up the project to making the front end and back end communicate with each other.
